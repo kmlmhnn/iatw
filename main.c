@@ -3,10 +3,11 @@
 #include "display.h"
 #include "map.h"
 #include "player.h"
+#include "save.h"
 
 int main()
 {
-	int mapdata[] = {
+	/*int mapdata[] = {
 		'x', 'x', 'x', 'x', 'x', 'x', 'x', 
 		'x', '.', '.', 'x', '.', '.', 'x',
 		'x', '.', '.', 'x', '.', '.', 'x', 
@@ -44,13 +45,18 @@ int main()
 	m1.vp_y = -15;
 	m1.player_x = 2;
 	m1.player_y = 3;
-	m1.data = mapdata;
+	m1.data = mapdata;*/
+
+
+	map* m1 = load_map("map.2");
+	viewport vp;
+
 
 
 	init_display();
 
-	init_viewport_from_map(&vp, &m1);
-	init_player_from_map(&m1);
+	init_viewport_from_map(&vp, m1);
+	init_player_from_map(m1);
 
 
 	show_title();
@@ -63,14 +69,14 @@ int main()
 		clear();
 
 		switch(ch){
-			case KEY_LEFT:	move_player(LEFT, &m1, &vp); break;
-			case KEY_RIGHT: move_player(RIGHT, &m1, &vp); break;
-			case KEY_UP:	move_player(UP, &m1, &vp); break;
-			case KEY_DOWN:	move_player(DOWN, &m1, &vp); break;
+			case KEY_LEFT:	move_player(LEFT, m1, &vp); break;
+			case KEY_RIGHT: move_player(RIGHT, m1, &vp); break;
+			case KEY_UP:	move_player(UP, m1, &vp); break;
+			case KEY_DOWN:	move_player(DOWN, m1, &vp); break;
 		}
 
 
-		show_map(&m1, &vp);
+		show_map(m1, &vp);
 		show_player(&vp);
 
 		print_status(&player);
@@ -78,6 +84,8 @@ int main()
 
 		refresh();
 	} 
+
+	unload_map(m1);
 	cleanup_display();
 		
 

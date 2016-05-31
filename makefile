@@ -2,10 +2,10 @@ CC=gcc
 CFLAGS=-Wall -c -g3
 LDFLAGS=-lncurses
 
-all: snow
+all: iatw
 
-snow: main.o display.o player.o
-	$(CC)  main.o display.o player.o -o snow $(LDFLAGS)
+iatw: main.o display.o player.o save.o
+	$(CC)  main.o display.o player.o save.o -o iatw $(LDFLAGS)
 
 main.o: main.c
 	$(CC) $(CFLAGS) main.c
@@ -16,6 +16,9 @@ display.o: display.c
 player.o: player.c
 	$(CC) $(CFLAGS) player.c
 
+save.o: save.c
+	$(CC) $(CFLAGS) save.c
+
 clean:
-	rm -f *o *~ snow
+	rm -f *o *~ iatw
 
