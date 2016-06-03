@@ -2,6 +2,8 @@
 #define MAP_H
 
 typedef struct {
+	int no;		// Each map has a unique number that ids it
+
 	int* data;	// 1d array of map data
 	int width;
 	int height;
